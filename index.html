@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Korina Koko — Fine Line Tattoo</title>
+  <meta name="description" content="Korina Koko — Fine Line & Single Needle Tattoo Artistin in Bonn. Termine per E-Mail." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="header">
+    <a href="#top" class="logo">Korina Koko</a>
+    <nav class="nav" id="nav" aria-label="Hauptnavigation">
+      <a href="#work">Arbeiten</a>
+      <a href="#about">Über mich</a>
+      <a href="#guest">Gastspots</a>
+      <a href="#book" class="nav-cta">Termin</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-media">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="images/tattoo-back.png"
+        >
+          <source src="images/v1.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-veil"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal">Fine Line · Single Needle · Bonn</p>
+        <h1 class="hero-brand reveal">
+          <span>Korina</span>
+          <span>Koko</span>
+        </h1>
+        <p class="hero-tagline reveal">Zarte Linien. Bleibende Zeichen.</p>
+        <div class="hero-actions reveal">
+          <a href="#book" class="btn btn-solid">Termin anfragen</a>
+          <a href="#work" class="btn btn-ghost">Arbeiten ansehen</a>
+        </div>
+      </div>
+      <a href="#work" class="scroll-hint" aria-label="Weiter scrollen">
+        <span>Scroll</span>
+        <span class="scroll-line"></span>
+      </a>
+    </section>
+
+    <section class="work" id="work">
+      <div class="section-head">
+        <h2 class="section-title reveal">Ausgewählte Arbeiten</h2>
+        <p class="section-lede reveal">Fine Line, Single Needle und Handschrift — in Schwarzweiß.</p>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <figure class="gallery-item tall" data-cat="needle classical">
+          <img src="images/tattoo-back.png" alt="Fine-Line Rückenstück mit klassischen Motiven" loading="lazy" />
+          <figcaption><span>Rückenstück</span><em>Single Needle</em></figcaption>
+        </figure>
+        <figure class="gallery-item" data-cat="classical needle">
+          <img src="images/tattoo-bust.png" alt="Klassische Büste am Unterarm" loading="lazy" />
+          <figcaption><span>Klassische Büste</span><em>Fine Line</em></figcaption>
+        </figure>
+        <figure class="gallery-item" data-cat="script">
+          <img src="images/tattoo-lip.png" alt="Verstecktes Lippen-Tattoo" loading="lazy" />
+          <figcaption><span>Versteckte Tinte</span><em>Handschrift</em></figcaption>
+        </figure>
+        <figure class="gallery-item wide" data-cat="script">
+          <img src="images/tattoo-amore.png" alt="Amore Handschrift-Tattoo" loading="lazy" />
+          <figcaption><span>Amore</span><em>Handschrift</em></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <img src="images/tattoo-bust.png" alt="Fine-Line Tattoo – klassische Büste" />
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow reveal">Über mich</p>
+          <h2 class="section-title reveal">Weniger ist mehr.</h2>
+          <p class="reveal">
+            Korina Koko ist Fine-Line- und Single-Needle-Tattoo-Artistin mit Basis in Bonn.
+            Ihre Arbeiten sind ruhig, präzise und klassisch inspiriert — Schriftzüge, feine Linien, klare Formen.
+          </p>
+          <p class="reveal">
+            Jedes Motiv wird individuell gezeichnet und so gesetzt, dass es über Jahre hinweg schön bleibt.
+          </p>
+          <ul class="traits reveal">
+            <li>Fine Line</li>
+            <li>Single Needle</li>
+            <li>Handschrift</li>
+            <li>Klassische Motive</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="guest" id="guest">
+      <div class="guest-inner">
+        <p class="eyebrow reveal">Unterwegs</p>
+        <h2 class="section-title reveal">Gastspots</h2>
+        <div class="guest-list">
+          <article class="guest-row reveal">
+            <div class="guest-place">
+              <h3>Firenze, Italien</h3>
+              <p>Gaststudio</p>
+            </div>
+            <time datetime="2026-06-01">01.06 — 24.07</time>
+            <span class="guest-status is-current">Aktuell</span>
+          </article>
+          <article class="guest-row reveal">
+            <div class="guest-place">
+              <h3>Bonn, Deutschland</h3>
+              <p>Heimatstudio</p>
+            </div>
+            <time datetime="2026-10-01">ab Q4</time>
+            <span class="guest-status">Basis</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="book" id="book">
+      <div class="book-shell">
+        <div class="book-intro">
+          <p class="eyebrow reveal">Termine</p>
+          <h2 class="section-title reveal">Für Termine in Deutschland bitte kontaktieren:</h2>
+          <a class="book-email reveal" href="mailto:kokosbookings@gmail.com">kokosbookings@gmail.com</a>
+          <p class="book-lede reveal">Bitte gib Folgendes an:</p>
+          <ul class="book-points reveal">
+            <li>Name</li>
+            <li>Alter (19+)</li>
+            <li>Tattoo-Beschreibung</li>
+            <li>Platzierung</li>
+            <li>Größe in cm</li>
+            <li>Verfügbarkeit</li>
+          </ul>
+          <p class="book-note reveal">
+            Instagram:
+            <a href="https://instagram.com/koko.moss" target="_blank" rel="noopener">@koko.moss</a>
+          </p>
+        </div>
+
+        <form class="book-form reveal" id="bookForm" novalidate>
+          <p class="form-hint">Anfrage vorbereiten — öffnet deine E-Mail an kokosbookings@gmail.com</p>
+          <div class="form-row">
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              <span>Alter (19+)</span>
+              <input type="number" name="age" min="19" max="99" required placeholder="19+" />
+            </label>
+          </div>
+          <label>
+            <span>Tattoo-Beschreibung</span>
+            <textarea name="description" rows="3" required placeholder="Beschreibe dein Motiv…"></textarea>
+          </label>
+          <div class="form-row">
+            <label>
+              <span>Platzierung</span>
+              <input type="text" name="placement" required placeholder="z. B. Unterarm innen" />
+            </label>
+            <label>
+              <span>Größe in cm</span>
+              <input type="text" name="size" required placeholder="z. B. 8 cm" />
+            </label>
+          </div>
+          <label>
+            <span>Verfügbarkeit</span>
+            <textarea name="availability" rows="2" required placeholder="Wann hast du Zeit?"></textarea>
+          </label>
+          <button type="submit" class="btn btn-solid btn-full btn-book">E-Mail senden</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <span class="footer-name">Korina Koko</span>
+      <span class="footer-meta">Bonn · Fine Line Tattoo</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://instagram.com/koko.moss" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:kokosbookings@gmail.com">E-Mail</a>
+      <a href="#book">Termin</a>
+    </div>
+    <p class="footer-copy">&copy; <span id="year"></span> Korina Koko</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Schließen">&times;</button>
+    <img src="" alt="" id="lightboxImg" />
+    <p class="lightbox-cap" id="lightboxCap"></p>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
