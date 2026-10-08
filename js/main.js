@@ -45,7 +45,94 @@
   const sizeValue = document.getElementById("sizeValue");
   const dateField = document.getElementById("dateField");
 
-  const WHATSAPP = "4915170420547";
+  const audio = document.getElementById("bgAudio");
+  const soundToggle = document.getElementById("soundToggle");
+  const MUTED_KEY = "allgood-music-off";
+  const storageGet = (key) => {
+    try { return sessionStorage.getItem(key); } catch { return null; }
+  };
+  const storageSet = (key, value) => {
+    try {
+      if (value == null) sessionStorage.removeItem(key);
+      else sessionStorage.setItem(key, value);
+    } catch { /* private mode */ }
+  };
+  let wantSound = storageGet(MUTED_KEY) !== "1";
+  let musicStart = null;
+
+  const setSoundUi = (on) => {
+    if (!soundToggle) return;
+    soundToggle.setAttribute("aria-pressed", String(on));
+    soundToggle.setAttribute("aria-label", on ? "Muziek uitzetten" : "Muziek aanzetten");
+  };
+
+  const fadeMusic = () => {
+    if (!audio) return;
+    const target = 0.42;
+    const startedAt = performance.now();
+    const step = (now) => {
+      if (!wantSound || audio.paused) return;
+      const t = Math.min(1, (now - startedAt) / 1400);
+      audio.volume = target * t;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    audio.volume = 0;
+    requestAnimationFrame(step);
+  };
+
+  const startMusic = () => {
+    if (!audio || !wantSound) return Promise.resolve(false);
+    if (!audio.paused) return Promise.resolve(true);
+    if (musicStart) return musicStart;
+    musicStart = audio.play().then(() => {
+      if (!wantSound) {
+        audio.pause();
+        setSoundUi(false);
+        return false;
+      }
+      setSoundUi(true);
+      fadeMusic();
+      window.removeEventListener("pointerdown", unlockMusic, true);
+      window.removeEventListener("keydown", unlockMusic, true);
+      return true;
+    }).catch(() => {
+      setSoundUi(false);
+      return false;
+    }).finally(() => {
+      musicStart = null;
+    });
+    return musicStart;
+  };
+
+  const unlockMusic = () => {
+    if (!wantSound || (audio && !audio.paused)) return;
+    startMusic();
+  };
+
+  if (audio) {
+    audio.loop = true;
+    audio.volume = 0;
+    setSoundUi(false);
+    startMusic();
+    window.addEventListener("pointerdown", unlockMusic, true);
+    window.addEventListener("keydown", unlockMusic, true);
+  }
+
+  soundToggle?.addEventListener("click", () => {
+    if (!audio) return;
+    if (!audio.paused) {
+      wantSound = false;
+      storageSet(MUTED_KEY, "1");
+      audio.pause();
+      setSoundUi(false);
+      return;
+    }
+    wantSound = true;
+    storageSet(MUTED_KEY, null);
+    startMusic();
+  });
+
+  const WHATSAPP = "31645536039";
   const MAX_BYTES = 8 * 1024 * 1024;
   let previewUrl = "";
 
@@ -59,7 +146,7 @@
 
   const setMenu = (open) => {
     menuToggle?.setAttribute("aria-expanded", String(open));
-    menuToggle?.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+    menuToggle?.setAttribute("aria-label", open ? "Menu sluiten" : "Menu openen");
     nav?.classList.toggle("is-open", open);
     document.body.classList.toggle("menu-open", open);
     document.body.style.overflow = open ? "hidden" : "";
@@ -181,11 +268,11 @@
   const showPreview = (file) => {
     if (!file || !lookPreview || !lookStage) return;
     if (!file.type.startsWith("image/")) {
-      setStatus("Bitte ein Bild im Format JPG, PNG oder WebP wählen.", "bad");
+      setStatus("Kies een afbeelding in JPG, PNG of WebP.", "bad");
       return;
     }
     if (file.size > MAX_BYTES) {
-      setStatus("Das Foto ist größer als 8 MB. Bitte ein kleineres Bild wählen.", "bad");
+      setStatus("De foto is groter dan 8 MB. Kies een kleiner bestand.", "bad");
       return;
     }
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -194,11 +281,11 @@
       lookPreview.hidden = false;
       lookStage.classList.add("has-image");
       if (lookClear) lookClear.hidden = false;
-      setStatus("Vorschau ist da. Das Foto bleibt auf diesem Gerät.", "ok");
+      setStatus("Voorbeeld staat. De foto blijft op dit apparaat.", "ok");
     };
     lookPreview.onerror = () => {
       clearPreview();
-      setStatus("Dieses Format kann hier nicht angezeigt werden. Bitte JPG, PNG oder WebP.", "bad");
+      setStatus("Dit formaat kan hier niet getoond worden. Kies JPG, PNG of WebP.", "bad");
     };
     lookPreview.src = previewUrl;
   };
@@ -243,20 +330,20 @@
     const size = String(data.get("size") || "").trim();
 
     if (!name || !phone || !place || !message) {
-      setStatus("Bitte Name, Telefon, Körperstelle und Motiv ausfüllen.", "bad");
+      setStatus("Vul naam, telefoon, plek en motief in.", "bad");
       form.reportValidity();
       return;
     }
 
     const lines = [
-      "Hallo Sven Tattoo, ich möchte einen Termin anfragen.",
-      `Name: ${name}`,
-      `Telefon: ${phone}`,
-      date ? `Wunschdatum: ${date}` : "",
-      `Größe: ca. ${size} cm`,
-      `Körperstelle: ${place}`,
-      `Motiv: ${message}`,
-      previewUrl ? "Ich schicke ein Referenzfoto direkt in diesem Chat mit." : ""
+      "Hallo All Good Tattoo, ik wil graag een afspraak aanvragen.",
+      `Naam: ${name}`,
+      `Telefoon: ${phone}`,
+      date ? `Gewenste datum: ${date}` : "",
+      `Grootte: ca. ${size} cm`,
+      `Plek: ${place}`,
+      `Motief: ${message}`,
+      previewUrl ? "Ik stuur een referentiefoto mee in deze chat." : ""
     ].filter(Boolean);
 
     const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lines.join("\n"))}`;
@@ -264,6 +351,6 @@
     if (!opened) {
       window.location.href = url;
     }
-    setStatus("WhatsApp öffnet sich. Häng das Foto dort als Anhang an.", "ok");
+    setStatus("WhatsApp opent. Hang de foto daar als bijlage aan.", "ok");
   });
 })();

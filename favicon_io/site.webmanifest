@@ -1,6 +1,6 @@
 {
-  "name": "Sven Tattoo",
-  "short_name": "Sven Tattoo",
+  "name": "All Good Tattoo Parlor",
+  "short_name": "All Good",
   "icons": [
     { "src": "/favicon_io/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/favicon_io/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
